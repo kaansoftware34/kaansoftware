@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaan KARACA — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #0F0F0F;
+    --paper:     #F7F6F2;
+    --muted:     #6B6860;
+    --rule:      #D9D7CF;
+    --accent:    #1A4FDB;
+    --accent-lt: #EDF0FC;
+    --tag-bg:    #EEECEA;
+    --gap:       clamp(1.5rem, 4vw, 2.5rem);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3rem);
+  }
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: var(--gap);
+  }
+  .name-block h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2.6rem, 7vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .name-block h1 em { font-style: italic; color: var(--accent); }
+  .tagline {
+    margin-top: .55rem;
+    font-size: .85rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .contact-strip { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: var(--gap); margin-bottom: var(--gap); }
+  .chip {
+    display: inline-flex; align-items: center; gap: .45rem;
+    padding: .45rem .85rem; border-radius: 2px;
+    font-size: .78rem; font-weight: 500; letter-spacing: .04em;
+    text-decoration: none; transition: background .18s, color .18s;
+  }
+  .chip svg { flex-shrink: 0; }
+  .chip-linkedin { background: #0A66C2; color: #fff; }
+  .chip-linkedin:hover { background: #084e96; }
+  .chip-github   { background: var(--ink); color: #fff; }
+  .chip-github:hover { background: #333; }
+  .chip-medium   { background: #000; color: #fff; }
+  .chip-medium:hover { background: #222; }
+  .chip-email    { background: var(--tag-bg); color: var(--ink); border: 1px solid var(--rule); }
+  .chip-email:hover { background: var(--rule); }
+  section { margin-bottom: var(--gap); }
+  .section-label {
+    font-size: .72rem; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 1rem; padding-bottom: .4rem; border-bottom: 1px solid var(--rule);
+  }
+  .about p { font-size: .95rem; max-width: 65ch; }
+  .entries { display: flex; flex-direction: column; gap: 1.4rem; }
+  .entry { display: grid; grid-template-columns: 9rem 1fr; gap: 0 1.5rem; }
+  .entry-date { font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--muted); padding-top: .15rem; text-align: right; }
+  .entry-body h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; font-weight: 400; line-height: 1.25; }
+  .entry-body .org { font-size: .8rem; font-weight: 500; color: var(--accent); margin-bottom: .35rem; }
+  .entry-body p { font-size: .87rem; color: #3a3a38; }
+  .skill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .75rem 1.25rem; }
+  .skill-group h4 { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .35rem; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .tag { background: var(--tag-bg); border: 1px solid var(--rule); border-radius: 2px; padding: .2rem .6rem; font-size: .75rem; font-weight: 500; color: var(--ink); font-family: 'JetBrains Mono', monospace; }
+
+  /* PROJECT CARD — tek büyük kart */
+  .project-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.6rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+    transition: box-shadow .2s, border-color .2s;
+  }
+  .project-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); border-color: #b8b5ac; }
+  .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.25rem; font-weight: 400; line-height: 1.3; }
+  .project-card p { font-size: .88rem; color: #3a3a38; }
+  .project-links { display: flex; gap: .5rem; margin-top: .5rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: .35rem;
+    padding: .4rem .9rem; font-size: .78rem; font-weight: 600;
+    border-radius: 2px; text-decoration: none; transition: background .18s, color .18s;
+  }
+  .btn-pdf    { background: var(--accent); color: #fff; }
+  .btn-pdf:hover { background: #1440b8; }
+  .btn-github { background: var(--ink); color: #fff; }
+  .btn-github:hover { background: #333; }
+  .btn-demo   { background: var(--tag-bg); color: var(--ink); border: 1px solid var(--rule); }
+  .btn-demo:hover { background: var(--rule); }
+
+  .lang-row { display: flex; align-items: center; gap: 1rem; margin-bottom: .6rem; }
+  .lang-name { font-size: .87rem; font-weight: 500; min-width: 6rem; }
+  .lang-level { font-size: .75rem; color: var(--muted); }
+  .lang-bar { flex-grow: 1; height: 3px; background: var(--rule); border-radius: 2px; overflow: hidden; max-width: 160px; }
+  .lang-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+
+  footer {
+    margin-top: calc(var(--gap) * 1.5);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: .5rem;
+    font-size: .72rem; color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  @media (max-width: 560px) {
+    header { grid-template-columns: 1fr; }
+    .entry { grid-template-columns: 1fr; }
+    .entry-date { text-align: left; margin-bottom: .15rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="name-block">
+      <h1>Kaan <em>KARACA</em></h1>
+      <p class="tagline">Bilgisayar Mühendisliği · Yüksek Lisans Öğrencisi</p>
+    </div>
+  </header>
+
+  <div class="contact-strip">
+    <a class="chip chip-linkedin" href="https://linkedin.com/in/kaansoftware34" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.987V9h3.102v1.561h.046c.431-.818 1.484-1.681 3.054-1.681 3.267 0 3.868 2.149 3.868 4.943v6.629zM5.337 7.433a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6zm1.554 13.019H3.782V9h3.109v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 2２．２７１V１．７２９C２４．０．７７４ ２３．２ ０ ２２．２２２ ０z"/></svg>
+      LinkedIn
+    </a>
+    <a class="chip chip-github" href="https://github.com/kaansoftware34" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      GitHub
+    </a>
+    <a class="chip chip-medium" href="https://medium.com/@kaansoftware34" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+      Medium
+    </a>
+    <a class="chip chip-email" href="mailto:kaankararaca28@gmail.com">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      kaankararaca28@gmail.com
+    </a>
+  </div>
+
+  <section class="about">
+    <p class="section-label">Hakkımda</p>
+    <p>Bilgisayar Mühendisliği yüksek lisans öğrencisiyim. Makine öğrenmesi, doğal dil işleme tecrübelerim var, ERP sektöründe 5 yıl tecrübem var.Takım çalışmasına yatkın, öğrenmeye açık bir profil sergiliyorum.</p>
+  </section>
+
+  <section>
+    <p class="section-label">Eğitim</p>
+    <div class="entries">
+      <div class="entry">
+        <span class="entry-date">2026-</span>
+        <div class="entry-body">
+          <h3>Bilgisayar Mühendisliği, Yüksek Lisans</h3>
+          <p class="org">Marmara Üniversitesi</p>
+        </div>
+      </div>
+       <div class="entries">
+      <div class="entry">
+        <span class="entry-date">2026 Yaz-</span>
+        <div class="entry-body">
+            <h3>Summer School — Machine Learning</h3>
+          <p class="org">SoftITo Yazılım - Bilişim Akademisi</p>
+          <p>320 saat yapay zeka eğitimi.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="entry-date">2020</span>
+        <div class="entry-body">
+          <h3>Bilgisayar Programcılığı</h3>
+          <p class="org">Anadolu Üniversitesi </p>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="entry-date">2016</span>
+        <div class="entry-body">
+          <h3>Makine Mühendisliği</h3>
+          <p class="org">Yıldız Teknik Üniversitesi </p>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Deneyim</p>
+    <div class="entries">
+      <div class="entry">
+        <span class="entry-date">Şub 2021 — Hâlen</span>
+        <div class="entry-body">
+          <h3>Erp Yazılım Geliştirici</h3>
+          <p class="org">İstanbul</p>
+          <p>D365FO ortamında X++ nesne yönelimli programlama dili ile madencilik, inşaat, ev aletleri ve araç satış (otomotiv/bayi) gibi farklı sektörlerde faaliyet gösteren şirketlerin karmaşık iş süreçlerine yönelik uçtan uca sistem geliştirme, Extension mimarisi (Chain of Command - CoC ve Event Handlers) kullanılarak sektörel gereksinimlere uygun standart iş süreçlerinin özelleştirilmesi, SysOperation Framework ile asenkron ve batch (toplu) operasyonların kurgulanması, veri tabanı seviyesinde yüksek performanslı toplu veri güncellemeleri için X++ "update_recordset" ve "insert_recordset" operasyonlarının SQL karşılıklarının analizi ve optimizasyonu, GİB mevzuatına tam uyumlu E-Fatura, E-Arşiv ve E-İrsaliye gibi yerel (localization) e-dönüşüm modüllerinin sıfırdan mimari tasarımı, UBL formatında XML oluşturma, web servis entegrasyonları ve özel hata/log yönetim mekanizmalarının geliştirilmesi, SSRS (SQL Server Reporting Services) tabanlı karmaşık finansal ve operasyonel raporların RDP (Report Data Provider), Contract, UI Builder ve Controller sınıfları ile tasarlanması ve Precision Design optimizasyonları, ilişkisel veri modellerinin (Data Model) kurgulanması, OData ve BYOD (Bring Your Own Database) gibi dış sistem entegrasyonları için Data Entity uzantılarının (extensions) geliştirilmesi ve Data Entity giriş-çıkış (check-in) operasyonlarının güvenli yönetimi, form düzeyinde detaylı UI doğrulama mekanizmalarının kurgulanması (unbound mandatory alan kontrollerinin "Sorgula" gibi butonların "clicked()" metotlarında "throw error" mantığıyla dinamik olarak denetlenmesi), çoklu şirket (multi-company / cross-company) hiyerarşisine sahip karmaşık raporlama mimarilerindeki kronik veri izolasyonu hatalarının tespiti ve çözümü, finansal süreçler için otomatik hesap ve defter (ledger) doğrulama (validation) metotlarının kurgulanması, veritabanı okuma/yazma performansını doğrudan artıran canlı ortam (prod) indeksleme yapılandırmalarının yönetimi, zaman izleme görünüm ölçeği (time-tracking display scale) varyasyonlarının ve veritabanı kurtarma durumlarının (database recovery states) sisteme uyarlanması, son olarak geliştirilen sektörel özel yazılım modüllerinde (custom modules) kapsamlı alan izleme (field tracking) kriterlerinin ve veri akış güvenliğinin uçtan uca sağlanması.</p>
+        </div>
+      </div>
+      <!-- <div class="entry">
+        <span class="entry-date">Haz 2023 — Eyl 2023</span>
+        <div class="entry-body">
+          <h3>Backend Stajyeri</h3>
+          <p class="org">Getir — İstanbul</p>
+          <p>Node.js mikroservislerinde yük dengesi iyileştirmesi yaptım; REST API yanıt sürelerini %30 azalttım. CI/CD süreçleri için Docker ve GitHub Actions kullandım.</p>
+        </div> -->
+      </div>
+      <div class="entry">
+        <span class="entry-date">2016-2021</span>
+        <div class="entry-body">
+          <h3>Arge Mühendisi</h3>
+          <p class="org">ARGE tasarım analiz mühendisliği</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section>
+    <p class="section-label">Bitirme Projesi</p>
+    <div class="project-card">
+      <h3>İTO News Automation & RAG Sistemi v2</h3>
+      <p>İstanbul Ticaret Gazetesi haberlerini otomatik olarak çeken, sektörlerine göre sınıflandıran, duygu analizi (BERT) yapan ve kullanıcılara 11 modüllü API tabanlı RAG mimarisi (Jina, Cohere, Gemini) ile akıllı soru-cevap hizmeti sunan bulut tabanlı otomasyon sistemi.</p>
+      
+      <div class="tag-list">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">pgVector</span>
+        <span class="tag">RAG</span>
+        <span class="tag">Jina</span>
+        <span class="tag">Cohere</span>
+        <span class="tag">Gemini</span>
+      </div>
+
+      <div class="project-links">
+        <!-- GITHUB'DAN DİREKT RAR İNDİRME BUTONU -->
+        <a class="btn btn-pdf" href="https://github.com/kaansoftware34/GrupProjesi_benim_kismim/raw/main/Istanbul-Ticaret-Gazetesi-Yapay-Zeka-Raporu.rar" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Raporu İndir (RAR)
+        </a>
+        
+        <!-- GitHub Kaynak Kod Butonu -->
+        <a class="btn btn-github" href="https://github.com/kaansoftware34/GrupProjesi_benim_kismim" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          Kaynak Kod
+        </a>
+
+        <!-- Canlı Demo Butonu -->
+        <a class="btn btn-demo" href="https://ito-news.vercel.app/summaries" target="_blank" rel="noopener">Canlı Demo →</a>
+      </div>
+    </div>
+  </section>
+  <section>
+    <p class="section-label">Teknik Beceriler</p>
+    <div class="skill-grid">
+      <div class="skill-group">
+        <h4>Diller</h4>
+        <div class="tag-list">
+          <span class="tag">Python</span><span class="tag">Go</span>
+          <span class="tag">TypeScript</span><span class="tag">SQL</span><span class="tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>ML / AI</h4>
+        <div class="tag-list">
+          <span class="tag">PyTorch</span><span class="tag">HuggingFace</span>
+          <span class="tag">scikit-learn</span><span class="tag">LangChain</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Altyapı</h4>
+        <div class="tag-list">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+          <span class="tag">AWS</span><span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Veri &amp; Backend</h4>
+        <div class="tag-list">
+          <span class="tag">PostgreSQL</span><span class="tag">Redis</span>
+          <span class="tag">Kafka</span><span class="tag">FastAPI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Diller</p>
+    <div class="lang-row">
+      <span class="lang-name">Türkçe</span>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
+      <span class="lang-level">Anadil</span>
+    </div>
+    <div class="lang-row">
+      <span class="lang-name">İngilizce</span>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:90%"></div></div>
+      <span class="lang-level">B2 — İleri</span>
+    </div>
+    <!-- <div class="lang-row">
+      <span class="lang-name">Almanca</span>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width:40%"></div></div>
+      <span class="lang-level">A2 — Başlangıç</span> -->
+    </div>
+  </section>
+
+  <footer>
+    <span>ayse.kaya@email.com · İstanbul, TR</span>
+    <span>Haziran 2025</span>
+  </footer>
+
+</div>
+</body>
+</html>
